@@ -19,7 +19,6 @@ mainDiv.addEventListener('click', function(event){
     }
 })
 
-
 function renderTrainerCard(trainer) {
     let trainerHTML = `
         <div class="card" data-id="${trainer.id}"><p>${trainer.name}</p>
@@ -60,10 +59,10 @@ function addPokemon(trainerId) {
             return response.json();
         })
         .then(pokemon => {
-            if (pokemon.id) {
-                renderPokemon(pokemon);
-            } else {
+            if (pokemon.error) {
                 throw Error(pokemon.error);
+            } else {
+                renderPokemon(pokemon);
             }
         })
         .catch(function(error) {
